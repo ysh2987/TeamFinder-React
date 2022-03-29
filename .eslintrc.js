@@ -1,13 +1,11 @@
 module.exports = {
   env: {
     browser: true,
+    node: true,
     es2021: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier'],
+  ignorePatterns: ['*.config.js', '*.html'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -17,24 +15,7 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
-    'object-curly-newline': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    'comma-dangle': 'off',
-    semi: 'off',
-    'space-before-function-paren': 'off',
-    'prettier/prettier': [
-      'error',
-      {
-        singleQuote: true,
-        parser: 'flow',
-        endOfLine: 'auto',
-      },
-    ],
-    'multiline-ternary': 'off',
-    indent: 'off',
-    'linebreak-style': 0,
-    'consistent-return': 'off',
-    'jsx-a11y/img-redundant-alt': 'off',
-    'react/no-array-index-key': 'off',
+    'arrow-body-style': 'off',
+    'prefer-arrow-callback': 'off',
   },
 };
