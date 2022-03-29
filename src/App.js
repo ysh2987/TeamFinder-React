@@ -1,13 +1,19 @@
 import React from 'react';
-import axios from 'axios';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import GlobalStyle from './styles/GlobalStyle';
+import Header from './components/common/Header';
+import Home from './components/home/Home';
 
 function App() {
-  const test = async () => {
-    const a = await axios.get('http://localhost:8080/api/posts');
-    console.log(a.data);
-  };
-  test();
-  return <p>홈</p>;
+  return (
+    <BrowserRouter>
+      <GlobalStyle />
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
