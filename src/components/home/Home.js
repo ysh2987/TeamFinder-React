@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Card from '../common/Card';
 
 const Home = () => {
   return (
@@ -15,7 +16,7 @@ const Home = () => {
         </p>
         <img src="/images/team.png" alt="we are the team" />
       </section>
-      <section>카드리스트</section>
+      <Card />
     </StyledHome>
   );
 };
