@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+// import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import data from './data';
 import dataFilter from '../../dataFilter';
+import fetchUserByPosts from '../../store/posts/postsThunk';
+import { useDispatch } from 'react-redux';
 
 function Card() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUserByPosts());
+  }, []);
   return (
     <StyledCardWrap>
       <StyledCard>
@@ -88,6 +95,7 @@ const StyledCard = styled.ul`
       }
       img {
         width: 60px;
+        height: 60px;
       }
     }
     .card-footer {

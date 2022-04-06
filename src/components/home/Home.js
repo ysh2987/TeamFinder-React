@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Card from '../common/Card';
+import Filter from './Filter';
 
-const Home = () => {
+function Home() {
   return (
     <StyledHome>
       <section className="banner">
@@ -16,10 +17,11 @@ const Home = () => {
         </p>
         <img src="/images/team.png" alt="we are the team" />
       </section>
+      <Filter />
       <Card />
     </StyledHome>
   );
-};
+}
 
 export default Home;
 
