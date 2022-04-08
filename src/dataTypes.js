@@ -1,4 +1,4 @@
-const dataFilter = {
+const dataTypes = {
   sports: ['배드민턴', '야구', '농구', '당구', '볼링', '축구', '런닝'],
   cities: [
     '서울시',
@@ -19,4 +19,4 @@ const dataFilter = {
   ],
 };
 
-export default dataFilter;
+export default dataTypes;

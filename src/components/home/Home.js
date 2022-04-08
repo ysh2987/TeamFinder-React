@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import fetchUserByPosts from '../../store/posts/postsThunk';
 import Card from '../common/Card';
 import Filter from './Filter';
+import Loading from '../common/Loading';
+import ApiError from '../common/ApiError';
 
 function Home() {
+  const { filterData, loading, error } = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+  console.log(filterData);
+  useEffect(() => {
+    dispatch(fetchUserByPosts());
+  }, []);
   return (
     <StyledHome>
       <section className="banner">
@@ -18,7 +28,17 @@ function Home() {
         <img src="/images/team.png" alt="we are the team" />
       </section>
       <Filter />
-      <Card />
+      <section className="card-wrap">
+        {loading && <Loading />}
+        {error && <ApiError />}
+        {filterData && !!filterData.length && <Card dataList={filterData} />}
+        {filterData && !filterData.length && (
+          <div className="not-data">
+            <p>작성된 게시글이 없습니다.</p>
+            <button type="button">첫 번째로 작성하러 가기</button>
+          </div>
+        )}
+      </section>
     </StyledHome>
   );
 }
@@ -28,6 +48,7 @@ export default Home;
 const StyledHome = styled.main`
   .banner {
     text-align: center;
+    margin-bottom: 50px;
     p {
       font-size: 1.5rem;
     }
@@ -38,10 +59,34 @@ const StyledHome = styled.main`
     }
     span {
       font-family: 'Anton', sans-serif;
+      font-size: 1.8rem;
     }
     img {
       width: 100%;
       max-width: 800px;
+    }
+  }
+  .card-wrap {
+    padding: 40px 0;
+    background-color: #e0e0e0;
+    .not-data {
+      text-align: center;
+      padding: 20px 0;
+      p {
+        font-size: 1.2rem;
+        font-weight: bold;
+
+        margin-bottom: 25px;
+      }
+      button {
+        padding: 15px;
+        border: 1px solid;
+        border-radius: 5px;
+        &:hover {
+          background-color: black;
+          color: #fff;
+        }
+      }
     }
   }
 `;

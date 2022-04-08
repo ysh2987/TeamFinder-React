@@ -1,27 +1,20 @@
-import React, { useEffect } from 'react';
-// import { useSelector } from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import data from './data';
-import dataFilter from '../../dataFilter';
-import fetchUserByPosts from '../../store/posts/postsThunk';
-import { useDispatch } from 'react-redux';
+import dataTypes from '../../dataTypes';
 
-function Card() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchUserByPosts());
-  }, []);
+function Card({ dataList }) {
   return (
     <StyledCardWrap>
       <StyledCard>
-        {data.map((item) => {
+        {dataList.map((item) => {
           return (
-            <li key={item.id}>
+            <li key={item.id} className={item.recruit ? undefined : 'recurit'}>
               <p className="title">{item.title}</p>
               <div className="sports-wrap">
                 {item.sportsTypes.map((sport, index) => {
                   if (index > 2) return;
-                  const sportPick = dataFilter.sports[sport];
+                  const sportPick = dataTypes.sports[sport];
                   return (
                     <div key={index}>
                       <img
@@ -34,11 +27,10 @@ function Card() {
                 })}
               </div>
               <div className="card-footer">
-                <span className="city-name">
-                  {dataFilter.cities[item.city]}
-                </span>
+                <span className="city-name">{dataTypes.cities[item.city]}</span>
                 <span>♥ {item.likeCount}</span>
               </div>
+              {!item.recruit && <div className="recruit-title">모집 완료</div>}
             </li>
           );
         })}
@@ -49,18 +41,18 @@ function Card() {
 
 export default Card;
 
+Card.propTypes = {
+  dataList: PropTypes.array.isRequired,
+};
+
 const StyledCard = styled.ul`
-  width: 100%;
-  max-width: 1400px;
-  justify-content: center;
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  margin-bottom: 10rem;
   li {
     width: 100%;
     max-width: 320px;
-
+    position: relative;
     height: 320px;
     display: flex;
     flex-direction: column;
@@ -71,6 +63,9 @@ const StyledCard = styled.ul`
     box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
     border-radius: 1.5rem;
     cursor: pointer;
+    &.recurit {
+      opacity: 0.5;
+    }
     .title {
       font-size: 1.2rem;
       font-weight: 400;
@@ -109,10 +104,29 @@ const StyledCard = styled.ul`
         color: #fff;
       }
     }
+    .recruit-title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      background-color: #000;
+      padding: 10px;
+    }
   }
 `;
 
-const StyledCardWrap = styled.section`
-  display: flex;
-  justify-content: center;
+const StyledCardWrap = styled.div`
+  width: 1370px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1370px) {
+    width: 1030px;
+  }
+  @media screen and (max-width: 1030px) {
+    width: 690px;
+  }
+  @media screen and (max-width: 690px) {
+    width: 320px;
+  }
 `;

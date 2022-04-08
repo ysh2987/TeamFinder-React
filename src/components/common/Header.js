@@ -57,7 +57,7 @@ const StyledHeader = styled.header`
   .header-right {
     position: relative;
     button {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: bold;
     }
     button + button {

@@ -1,6 +1,18 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+html {
+  @media screen and (max-width: 1440px) {
+    font-size: 14px;
+  }
+  @media screen and (max-width: 1024px) {
+    font-size: 12px;
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
+}
+
 *,
 *::before,
 *::after {
