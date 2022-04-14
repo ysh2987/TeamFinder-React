@@ -6,6 +6,7 @@ import Card from '../common/Card';
 import Filter from './Filter';
 import Loading from '../common/Loading';
 import ApiError from '../common/ApiError';
+import Login from '../login/LoginContainer';
 
 function Home() {
   const { filterData, loading, error } = useSelector((state) => state.posts);
@@ -39,6 +40,7 @@ function Home() {
           </div>
         )}
       </section>
+      <Login />
     </StyledHome>
   );
 }
