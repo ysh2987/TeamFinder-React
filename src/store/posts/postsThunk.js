@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import client from '../../service/axios';
 
 const fetchUserByPosts = createAsyncThunk(
   'posts/fetchByPostsData',
   async () => {
-    const response = await axios.get('http://localhost:8080/api/posts');
+    const response = await client.get('/posts');
     return response.data;
   },
 );

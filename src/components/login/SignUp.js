@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import fetchByLogin from '../../store/login/loginThunk';
 
-function Login({ setLoginPage }) {
-  const dispatch = useDispatch();
-  const { loginRejected } = useSelector((state) => state.login);
+function SignUp() {
+  // const dispatch = useDispatch();
+  // const { loginRejected } = useSelector((state) => state.login);
 
   const [loginData, setloginData] = useState({
     id: '',
+    nickName: '',
     pw: '',
+    pwConfirm: '',
   });
 
-  const { id, pw } = loginData;
+  const { id, pw, pwConfirm, nickName } = loginData;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -22,70 +22,72 @@ function Login({ setLoginPage }) {
     });
   };
 
-  const loginClick = () => {
-    dispatch(fetchByLogin({ id: id, pw: pw }));
-  };
-
-  const loginEnter = (e) => {
-    if (e.key === 'Enter' && id && pw) {
-      loginClick();
-    }
-  };
-
-  useEffect(() => {
-    setloginData({ ...loginData, pw: '' });
-  }, [loginRejected]);
-
   return (
     <StyledModalWrap>
       <div className="login-body">
         <p>아이디</p>
+        <div className="check">
+          <input
+            name="id"
+            onChange={onChange}
+            value={id}
+            type="name"
+            placeholder="아이디"
+            autoComplete="new-password"
+          />
+        </div>
+
+        <p className="cancel">닉네임</p>
         <input
-          name="id"
+          name="nickName"
           onChange={onChange}
-          onKeyUp={loginEnter}
-          value={id}
-          type="name"
-          placeholder="아이디"
-          autoComplete="off"
+          value={nickName}
+          type="text"
+          placeholder="비밀번호"
+          autoComplete="new-password"
         />
         <p className="cancel">비밀번호</p>
         <input
           name="pw"
           onChange={onChange}
-          onKeyUp={loginEnter}
           value={pw}
           type="password"
           placeholder="비밀번호"
-          autoComplete="off"
+          autoComplete="new-password"
+        />
+        <p className="cancel">비밀번호 확인</p>
+        <input
+          name="pwConfirm"
+          onChange={onChange}
+          value={pwConfirm}
+          type="password"
+          placeholder="비밀번호"
+          autoComplete="new-password"
         />
 
-        {loginRejected && (
-          <p className="fail-login">아이디 / 비밀번호를 확인해주세요.</p>
-        )}
         <div className="button-wrap">
           <button
             type="button"
             className="login-btn"
-            onClick={loginClick}
-            disabled={!(id && pw)}
+            // onClick={loginClick}
+            disabled={!(id && pw && pwConfirm)}
           >
-            로그인
+            회원가입 하기
           </button>
-          <button
+          {/* <button
             onClick={() => setLoginPage('signUp')}
             type="button"
             className="signup-btn"
           >
             회원가입
-          </button>
+          </button> */}
         </div>
       </div>
     </StyledModalWrap>
   );
 }
 
-export default Login;
+export default SignUp;
 
 const StyledModalWrap = styled.div`
   .login-body {
@@ -97,6 +99,9 @@ const StyledModalWrap = styled.div`
     }
     input + input {
       margin-top: 20px;
+    }
+    .check {
+      display: flex;
     }
     p {
       font-weight: bold;

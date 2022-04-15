@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
+import { isModal, logOut } from '../../store/login/loginSlice';
 
 function Header() {
-  const [isLogin, setIsLogin] = useState(false);
-  const [list, setList] = useState(true);
-  const [userName] = useState('유송현');
+  const [list, setList] = useState(false);
+
+  const dispatch = useDispatch();
+  const { isLogin, userNickName } = useSelector((state) => state.login);
+
+  const logoutClick = () => {
+    dispatch(logOut());
+    setList(false);
+  };
+
   return (
     <StyledHeader>
       <div className="logo">Team Finder</div>
@@ -14,20 +23,20 @@ function Header() {
           <>
             <button>새 글 쓰기</button>
             <button onClick={() => setList(!list)}>
-              {userName} <MdOutlineArrowDropDown fill="#868e96" />
+              {userNickName} <MdOutlineArrowDropDown fill="#868e96" />
             </button>
             {list && (
               <ul>
                 <li>내 작성글</li>
                 <li>설정</li>
-                <li>로그아웃</li>
+                <li onClick={logoutClick}>로그아웃</li>
               </ul>
             )}
           </>
         ) : (
           <>
             <button>새 글 쓰기</button>
-            <button onClick={() => setIsLogin(!isLogin)}>로그인</button>
+            <button onClick={() => dispatch(isModal(true))}>로그인</button>
           </>
         )}
       </div>
