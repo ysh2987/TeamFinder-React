@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +14,7 @@ function Header() {
   const logoutClick = () => {
     dispatch(logOut());
     setList(false);
+    toast.success('로그아웃 되었습니다.', { autoClose: 1500 });
   };
 
   return (
@@ -27,7 +29,6 @@ function Header() {
             </button>
             {list && (
               <ul>
-                <li>내 작성글</li>
                 <li>설정</li>
                 <li onClick={logoutClick}>로그아웃</li>
               </ul>

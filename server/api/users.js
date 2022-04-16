@@ -29,4 +29,16 @@ usersRouter.post('/users', (req, res) => {
   }
 });
 
+// 회원가입
+usersRouter.post('/signup', (req, res) => {
+  if (users.some((user) => user.id === req.body.id)) {
+    res.send('0'); // id 중복: 0
+  } else if (users.some((user) => user.nickname === req.body.nickname)) {
+    res.send('1'); // 닉네임 중복: 1
+  } else {
+    users.push(req.body);
+    res.send([req.body.id, req.body.nickname]);
+  }
+});
+
 module.exports = usersRouter;

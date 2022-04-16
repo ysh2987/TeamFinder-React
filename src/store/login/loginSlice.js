@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import fetchByLogin from './loginThunk';
+import { toast } from 'react-toastify';
 
 const initialState = {
   isLogin: false,
@@ -34,6 +35,7 @@ export const loginSlice = createSlice({
         state.userId = action.payload.data.id;
         state.userNickName = action.payload.data.nickname;
         state.modalOpen = false;
+        toast.success(`${state.userId}님 환영합니다.`, { autoClose: 1500 });
       } else {
         state.loginRejected = true;
       }

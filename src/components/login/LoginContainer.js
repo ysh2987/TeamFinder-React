@@ -18,7 +18,7 @@ function LoginContainer() {
       case 'login':
         return <Login setLoginPage={setLoginPage} />;
       case 'signUp':
-        return <SignUp />;
+        return <SignUp setLoginPage={setLoginPage} />;
       default:
         return null;
     }

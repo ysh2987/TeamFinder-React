@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import propTypes from 'prop-types';
 import styled from 'styled-components';
+import client from '../../service/axios';
+import { toast } from 'react-toastify';
 
-function SignUp() {
-  // const dispatch = useDispatch();
-  // const { loginRejected } = useSelector((state) => state.login);
-
+function SignUp({ setLoginPage }) {
   const [loginData, setloginData] = useState({
     id: '',
     nickName: '',
@@ -20,6 +20,26 @@ function SignUp() {
       ...loginData,
       [name]: value,
     });
+  };
+
+  const signUpOnClcik = async () => {
+    try {
+      const response = await client.post('/signup', {
+        id: id,
+        pw: pw,
+        nickname: nickName,
+      });
+      if (response.data === 0) {
+        toast.error('아이디가 중복되었습니다', { autoClose: 1500 });
+      } else if (response.data === 1) {
+        toast.error('닉네임이 중복되었습니다', { autoClose: 1500 });
+      } else {
+        toast.success('회원가입에 성공하였습니다.', { autoClose: 1500 });
+        setLoginPage('login');
+      }
+    } catch {
+      alert('잠시 후 다시 시도해주세요!');
+    }
   };
 
   return (
@@ -64,29 +84,34 @@ function SignUp() {
           placeholder="비밀번호"
           autoComplete="new-password"
         />
-
+        {pw && pwConfirm && pw !== pwConfirm && (
+          <p className="fail-login">비밀번호를 확인해 주세요.</p>
+        )}
         <div className="button-wrap">
           <button
             type="button"
             className="login-btn"
-            // onClick={loginClick}
-            disabled={!(id && pw && pwConfirm)}
+            onClick={signUpOnClcik}
+            disabled={!(id && nickName && pw && pwConfirm && pw === pwConfirm)}
           >
             회원가입 하기
           </button>
-          {/* <button
-            onClick={() => setLoginPage('signUp')}
+          <button
+            onClick={() => setLoginPage('login')}
             type="button"
             className="signup-btn"
           >
-            회원가입
-          </button> */}
+            로그인 하러 가기
+          </button>
         </div>
       </div>
     </StyledModalWrap>
   );
 }
 
+SignUp.propTypes = {
+  setLoginPage: propTypes.func.isRequired,
+};
 export default SignUp;
 
 const StyledModalWrap = styled.div`
