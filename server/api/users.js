@@ -61,22 +61,17 @@ usersRouter.delete('/users/:id', (req, res) => {
 });
 usersRouter.patch('/users/:id', (req, res) => {
   try {
-    // const { id } = req.params;
-    // const { nickName } = req.body;
     const {
       params: { id },
       body: { nickName },
     } = req;
     const check = users.find((user) => user.nickname === nickName);
-    // console.log(check, nickName, id, 'hi3');
     if (check) {
       res.send({ status: '0' });
     } else {
-      console.log(users);
       users = users.map((user) =>
         user.id === id ? { ...user, nickname: nickName } : user,
       );
-      console.log(users);
       res.send({ nickName: nickName, status: '1' });
     }
   } catch (e) {

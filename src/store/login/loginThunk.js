@@ -23,7 +23,6 @@ export const fetchByResign = createAsyncThunk(
 export const fetchByNickName = createAsyncThunk(
   'users/fetchByNickName',
   async (userData) => {
-    console.log(userData.userNickName);
     const response = await client.patch(`/users/${userData.userId}`, {
       nickName: userData.userNickName,
     });

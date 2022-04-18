@@ -8,7 +8,6 @@ const initialState = {
   userId: null,
   modalOpen: false,
   loginRejected: false,
-  nickNameCheck: null,
 };
 
 export const loginSlice = createSlice({
@@ -59,9 +58,6 @@ export const loginSlice = createSlice({
     [fetchByResign.rejected]: () => {
       alert('잠시 후 다시 시도해주세요!');
     },
-    [fetchByNickName.pending]: (state) => {
-      state.nickNameCheck = null;
-    },
     [fetchByNickName.fulfilled]: (state, action) => {
       if (+action.payload.status === 0) {
         state.nickNameCheck = 0;
@@ -73,11 +69,9 @@ export const loginSlice = createSlice({
         toast.success('닉네임이 수정되었습니다.', {
           autoClose: 1500,
         });
-        state.nickNameCheck = 1;
       }
     },
-    [fetchByNickName.rejected]: (state) => {
-      state.nickNameCheck = null;
+    [fetchByNickName.rejected]: () => {
       alert('잠시 후 다시 시도해주세요!');
     },
   },
