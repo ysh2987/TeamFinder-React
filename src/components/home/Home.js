@@ -7,6 +7,7 @@ import Filter from './Filter';
 import Loading from '../common/Loading';
 import ApiError from '../common/ApiError';
 import Login from '../login/LoginContainer';
+import { loginInit } from '../../store/login/loginSlice';
 
 function Home() {
   const { filterData, loading, error } = useSelector((state) => state.posts);
@@ -14,6 +15,7 @@ function Home() {
   console.log(filterData);
   useEffect(() => {
     dispatch(fetchUserByPosts());
+    dispatch(loginInit());
   }, []);
   return (
     <StyledHome>
@@ -32,7 +34,9 @@ function Home() {
       <section className="card-wrap">
         {loading && <Loading />}
         {error && <ApiError />}
-        {filterData && !!filterData.length && <Card dataList={filterData} />}
+        {filterData && !!filterData.length && (
+          <Card dataList={filterData} type="home" />
+        )}
         {filterData && !filterData.length && (
           <div className="not-data">
             <p>작성된 게시글이 없습니다.</p>

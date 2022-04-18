@@ -9,7 +9,7 @@ module.exports = [
     date: '2021-12-13',
     recruit: true,
     likeCount: 10,
-    owner: { id: 0, nickname: '강남구원펀치' },
+    owner: { id: 'test1', nickname: '강남구원펀치' },
     comments: [
       {
         id: 1,
