@@ -10,11 +10,12 @@ import Login from '../login/LoginContainer';
 
 function Home() {
   const { filterData, loading, error } = useSelector((state) => state.posts);
+
   const dispatch = useDispatch();
-  console.log(filterData);
   useEffect(() => {
     dispatch(fetchUserByPosts());
   }, []);
+
   return (
     <StyledHome>
       <section className="banner">
@@ -32,7 +33,9 @@ function Home() {
       <section className="card-wrap">
         {loading && <Loading />}
         {error && <ApiError />}
-        {filterData && !!filterData.length && <Card dataList={filterData} />}
+        {filterData && !!filterData.length && (
+          <Card dataList={filterData} type="home" />
+        )}
         {filterData && !filterData.length && (
           <div className="not-data">
             <p>작성된 게시글이 없습니다.</p>

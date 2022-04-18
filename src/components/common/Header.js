@@ -4,8 +4,11 @@ import styled from 'styled-components';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { isModal, logOut } from '../../store/login/loginSlice';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header() {
+  const navigate = useNavigate();
+
   const [list, setList] = useState(false);
 
   const dispatch = useDispatch();
@@ -15,11 +18,19 @@ function Header() {
     dispatch(logOut());
     setList(false);
     toast.success('로그아웃 되었습니다.', { autoClose: 1500 });
+    navigate('/');
+  };
+
+  const settingClick = () => {
+    navigate('/setting');
+    setList(false);
   };
 
   return (
     <StyledHeader>
-      <div className="logo">Team Finder</div>
+      <Link to="/">
+        <div className="logo">Team Finder</div>
+      </Link>
       <div className="header-right">
         {isLogin ? (
           <>
@@ -29,7 +40,7 @@ function Header() {
             </button>
             {list && (
               <ul>
-                <li>설정</li>
+                <li onClick={settingClick}>설정</li>
                 <li onClick={logoutClick}>로그아웃</li>
               </ul>
             )}

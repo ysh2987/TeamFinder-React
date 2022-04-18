@@ -54,6 +54,9 @@ button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
+hr{
+  border-top: 1px solid #bbb;
+}
 
 `;
 

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import dataTypes from '../../dataTypes';
 
-function Card({ dataList }) {
+function Card({ dataList, type }) {
   return (
-    <StyledCardWrap>
+    <StyledCardWrap className={type}>
       <StyledCard>
         {dataList.map((item) => {
           return (
@@ -43,6 +43,7 @@ export default Card;
 
 Card.propTypes = {
   dataList: PropTypes.array.isRequired,
+  type: PropTypes.string,
 };
 
 const StyledCard = styled.ul`
@@ -117,16 +118,18 @@ const StyledCard = styled.ul`
 `;
 
 const StyledCardWrap = styled.div`
-  width: 1370px;
-  margin: 0 auto;
+  &.home {
+    width: 1370px;
+    margin: 0 auto;
 
-  @media screen and (max-width: 1370px) {
-    width: 1030px;
-  }
-  @media screen and (max-width: 1030px) {
-    width: 690px;
-  }
-  @media screen and (max-width: 690px) {
-    width: 320px;
+    @media screen and (max-width: 1370px) {
+      width: 1030px;
+    }
+    @media screen and (max-width: 1030px) {
+      width: 690px;
+    }
+    @media screen and (max-width: 690px) {
+      width: 320px;
+    }
   }
 `;

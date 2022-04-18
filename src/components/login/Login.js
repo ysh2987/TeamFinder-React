@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import fetchByLogin from '../../store/login/loginThunk';
+import { fetchByLogin } from '../../store/login/loginThunk';
 
 function Login({ setLoginPage }) {
   const dispatch = useDispatch();
