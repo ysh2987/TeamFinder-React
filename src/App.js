@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/common/Header';
 import Home from './components/home/Home';
 import Setting from './components/setting/Setting';
+import Write from './components/write/Write';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/setting" element={<Setting />} />
+        <Route path="/write" element={<Write />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>

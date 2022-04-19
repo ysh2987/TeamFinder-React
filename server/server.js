@@ -5,7 +5,7 @@ const apiRouter = require('./api/posts');
 const usersRouter = require('./api/users');
 
 const app = express();
-const port = 8080;
+const port = 5000;
 
 app.use(cors());
 app.use(bodyParser.json());
