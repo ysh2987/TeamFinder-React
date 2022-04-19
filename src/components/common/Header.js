@@ -34,7 +34,7 @@ function Header() {
       <div className="header-right">
         {isLogin ? (
           <>
-            <button>새 글 쓰기</button>
+            <button onClick={() => navigate('/write')}>새 글 쓰기</button>
             <button onClick={() => setList(!list)}>
               {userNickName} <MdOutlineArrowDropDown fill="#868e96" />
             </button>
@@ -47,7 +47,7 @@ function Header() {
           </>
         ) : (
           <>
-            <button>새 글 쓰기</button>
+            <button onClick={() => dispatch(isModal(true))}>새 글 쓰기</button>
             <button onClick={() => dispatch(isModal(true))}>로그인</button>
           </>
         )}

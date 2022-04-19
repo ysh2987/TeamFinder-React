@@ -14,6 +14,7 @@ function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUserByPosts());
+    console.log('확인해봄');
   }, []);
 
   return (
