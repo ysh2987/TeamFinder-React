@@ -87,7 +87,7 @@ function Login({ setLoginPage }) {
 }
 
 Login.propTypes = {
-  setLoginPage: propTypes.func.isRequired,
+  setLoginPage: propTypes.func,
 };
 export default Login;
 

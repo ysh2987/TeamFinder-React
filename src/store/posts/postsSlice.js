@@ -66,7 +66,6 @@ export const postsSlice = createSlice({
   },
   extraReducers: {
     [fetchUserByPosts.pending]: (state) => {
-      console.log('펜딩');
       state.loading = true;
       state.error = false;
       state.originalData = null;
@@ -75,13 +74,10 @@ export const postsSlice = createSlice({
     [fetchUserByPosts.fulfilled]: (state, action) => {
       state.originalData = action.payload;
       state.filterData = action.payload;
-      console.log(state.originalData, '오리지널');
-      console.log(state.filterData, '필터 ');
       state.loading = false;
       state.error = false;
     },
     [fetchUserByPosts.rejected]: (state) => {
-      console.log('리젝트');
       state.originalData = null;
       state.filterData = null;
       state.loading = false;

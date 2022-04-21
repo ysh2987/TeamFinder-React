@@ -7,6 +7,8 @@ import Header from './components/common/Header';
 import Home from './components/home/Home';
 import Setting from './components/setting/Setting';
 import Write from './components/write/Write';
+import Detail from './components/detail/Detail';
+import LoginContainer from './components/login/LoginContainer';
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/write" element={<Write />} />
+        <Route path="/detail/:no" element={<Detail />} />
       </Routes>
+      <LoginContainer />
       <ToastContainer />
     </BrowserRouter>
   );
