@@ -6,16 +6,27 @@ import Card from '../common/Card';
 import Filter from './Filter';
 import Loading from '../common/Loading';
 import ApiError from '../common/ApiError';
-import Login from '../login/LoginContainer';
+import { isModal } from '../../store/login/loginSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const { filterData, loading, error } = useSelector((state) => state.posts);
+  const { isLogin } = useSelector((state) => state.login);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(fetchUserByPosts());
-    console.log('확인해봄');
   }, []);
+
+  const firstWriteClick = () => {
+    if (!isLogin) {
+      dispatch(isModal(true));
+      return;
+    }
+    navigate('/write');
+  };
 
   return (
     <StyledHome>
@@ -40,11 +51,12 @@ function Home() {
         {filterData && !filterData.length && (
           <div className="not-data">
             <p>작성된 게시글이 없습니다.</p>
-            <button type="button">첫 번째로 작성하러 가기</button>
+            <button type="button" onClick={firstWriteClick}>
+              첫 번째로 작성하러 가기
+            </button>
           </div>
         )}
       </section>
-      <Login />
     </StyledHome>
   );
 }

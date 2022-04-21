@@ -2,14 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import dataTypes from '../../dataTypes';
+import { useNavigate } from 'react-router-dom';
 
 function Card({ dataList, type }) {
+  const navigate = useNavigate();
+
   return (
     <StyledCardWrap className={type}>
       <StyledCard>
         {dataList.map((item) => {
           return (
-            <li key={item.id} className={item.recruit ? undefined : 'recurit'}>
+            <li
+              key={item.id}
+              onClick={() => navigate(`/detail/${item.id}`)}
+              className={item.recruit ? undefined : 'recurit'}
+            >
               <p className="title">{item.title}</p>
               <div className="sports-wrap">
                 {item.sportsTypes.map((sport, index) => {
