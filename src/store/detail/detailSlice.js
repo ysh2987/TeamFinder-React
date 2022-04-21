@@ -44,12 +44,4 @@ export const detailSlice = createSlice({
   },
 });
 
-// export const {
-//   sportsFilter,
-//   cityFilter,
-//   sortFilter,
-//   recruitFilter,
-//   refreshPosts,
-// } = detailSlice.actions;
-
 export default detailSlice.reducer;
