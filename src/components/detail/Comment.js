@@ -39,7 +39,7 @@ function Comment({ no }) {
         date: today,
         owner: { id: userId, nickname: userNickName },
       }),
-    );
+    ).then(() => toast.success('댓글이 등록 되었습니다.', { autoClose: 1500 }));
   };
 
   return (
